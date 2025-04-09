@@ -1,0 +1,68 @@
+{
+  "user" :[
+    {
+      "name" : "Admin Mon",
+      "number":"123456789",
+      "age":29,
+      "dob":"1998-05-12",
+      "email":"admin@admin.com",
+      "password":"1234",
+      "role": "admin",
+      "id" : 1
+    }
+  ],
+
+  "products":[
+    {
+      "id":1,
+      "name":"Curtin",
+      "uploadPhote":"imageUrl",
+      "description":"A curtain",
+      "price":50
+    },
+    {
+      "id":2,
+      "name":"Curtin2",
+      "uploadPhote":"imageUrl",
+      "description":"A curtain",
+      "price":50
+    },
+    {
+      "id":3,
+      "name":"Curtin3",
+      "uploadPhote":"imageUrl",
+      "description":"A curtain",
+      "price":50
+    },
+     {
+      "id":4,
+      "name":"Curtin4",
+      "uploadPhote":"imageUrl",
+      "description":"A curtain",
+      "price":50
+    },
+    {
+      "id":5,
+      "name":"Curtin5",
+      "uploadPhote":"imageUrl",
+      "description":"A curtain",
+      "price":50
+    }
+  ],
+  "orders":[
+    {
+      "id":1,
+      "userId":3,
+      "sellerId":2,
+      "product":{
+        "id":5,
+        "name":"Curtin5",
+        "uploadPhote":"imageUrl",
+        "description":"A curtain",
+        "price":50
+      }
+
+    }
+  ]
+
+}
