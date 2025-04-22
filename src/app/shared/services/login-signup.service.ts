@@ -4,7 +4,8 @@ import { ApiService } from '../../core/service/api.service';
 import { Observable } from 'rxjs';
 
 type User={
-  user_name:string,
+  name:string,
+  email:string,
   password:string
 }
 
@@ -18,8 +19,8 @@ export class LoginSignupService {
 
   constructor(private http:HttpClient, private api:ApiService) { }
 
-  authLogin({user_name,password}:User):Observable<Object>{
-    return this.api.get(this.login_url + "/user?email="+user_name+"&password="+password);
+  authLogin({email,password}:User):Observable<Object>{
+    return this.api.get(this.login_url + "/user?email="+email+"&password="+password);
   }
 
   userRegister(user_dto:User):Observable<Object>{
@@ -27,7 +28,7 @@ export class LoginSignupService {
     )
   }
 
-  adminLogin({user_name,password}:User):Observable<Object>{
-    return this.api.get(this.login_url+"/user?email="+user_name+"&password="+password+"&role=admin");
+  adminLogin({email,password}:User):Observable<Object>{
+    return this.api.get(this.login_url+"/user?email="+email+"&password="+password+"&role=admin");
   }
 }

@@ -1,0 +1,28 @@
+{
+  "panel":[
+    {
+
+		"Id":"1",
+    "CupoHombre":"0",
+		"CupoMujer":"0",
+		"CupoTotal":"0",
+		"Mensaje":"NO SE SORTEA",
+		"Nombre":"Circunscripcion I",
+		"Nros":[{"NroSorteado":"00","VincHombre":1,"VincMujer":4,"VincTotal":5},
+		        {"NroSorteado":"09","VincHombre":10,"VincMujer":7,"VincTotal":17},
+		        {"NroSorteado":"12","VincHombre":1,"VincMujer":0,"VincTotal":1},
+		        {"NroSorteado":"14","VincHombre":7,"VincMujer":5,"VincTotal":12},
+		        {"NroSorteado":"15","VincHombre":5,"VincMujer":8,"VincTotal":13},
+		        {"NroSorteado":"21","VincHombre":2,"VincMujer":2,"VincTotal":4}],
+		"PendHombre":"0",
+		"PendMujer":"0",
+		"Sortea":false,
+		"Sorteo":"777",
+		"Total":"0",
+		"VincHombre":"0",
+		"VincMujer":"0"
+
+    }
+  ]
+
+}
