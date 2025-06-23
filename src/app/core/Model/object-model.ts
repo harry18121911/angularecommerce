@@ -1,11 +1,12 @@
+import { HttpParams } from "@angular/common/http";
+
 export class User {
-  id:string="";
+  id:any;
   name: string = "";
   number: string = "";
   uploadPhoto: string = "";
   role: string = "";
   password:string="";
-  mobNumber: string = "";
   address: string = "";
   gender: string = "";
   language: string = "";

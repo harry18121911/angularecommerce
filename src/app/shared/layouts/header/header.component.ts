@@ -1,28 +1,48 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
+  standalone:true,
   imports: [CommonModule,RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
-  public alterDisplay() {
-    let element = document.getElementById("productBar");
-    if (element) {
-        element.classList.toggle("hidden");
-    }
+  logged_in:boolean= false;
+  language:string = "English";
+  user_role:string|null = "";
+  constructor(private router:Router){}
 
+  ngOnInit():void{
 
   }
 
-  public test() {
-    alert("Test");
+  ngDoCheck(){
+    this.user_role= sessionStorage.getItem("role");
+    const user_session_id = sessionStorage.getItem("user_session_id");
+
+    if(user_session_id){
+      this.logged_in = true;
+    }
+  }
+
+  logout(){
+    sessionStorage.removeItem("user_session_id");
+    sessionStorage.removeItem("role");
+    this.router.navigateByUrl("/sign-in");
+    location.reload();
+  }
+
+  alterDisplay(){
+    let productBar = document.getElementById("productBar");
+    if(productBar){
+    productBar.classList.toggle("hidden");
+    }
+
   }
 
 }
 
-// el.className = el.className === "active" ? "inactive" : "active";

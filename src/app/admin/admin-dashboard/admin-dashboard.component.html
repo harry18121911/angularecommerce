@@ -1,1 +1,95 @@
-<p>admin-dashboard works!</p>
+<div class="">
+  <div class="text-center bg-gray-300 w-fit mx-auto p-4 items-center">
+    <h1 class="text-3xl">Welcome to Admin Dashboard</h1>
+    <p class="text-1xl">Admin can manage user and product details</p>
+  </div>
+  <div
+    (click)="userDashboard()"
+    class="text-center w-fit mx-auto p-4 bg-sky-200"
+  >
+    <h1 class="text-blue-700">Users</h1>
+    <h1 class="text-1xl">Manage user</h1>
+    <h1 class="text-1xl">Total Users {{total_user}}</h1>
+  </div>
+  <div id="progressbar-div" class="">
+    <div id="progress" class="bg-gray-200 w-96">
+      <div
+        id="progress-bar-success"
+        class="bg-green-700"
+        role="progressbar"
+        [ngStyle]="{ 'width.%': admin_user }"
+      >
+        Admin: {{ admin_user }}
+      </div>
+    </div>
+  </div>
+  <div id="progressbar-div2" class="">
+    <div id="progress" class="bg-gray-200 w-96">
+      <div
+        id="progress-bar-success"
+        class="bg-blue-700"
+        role="progressbar"
+        [ngStyle]="{ 'width.%': seller_user }"
+      >
+        Seller: {{ seller_user }}
+      </div>
+    </div>
+  </div>
+  <div id="progressbar-div3" class="">
+    <div id="progress" class="bg-gray-200 w-96">
+      <div
+        id="progress-bar-success"
+        class="bg-yellow-400"
+        role="progressbar"
+        [ngStyle]="{ 'width.%': buyer_user }"
+      >
+        Buyer: {{ buyer_user }}
+      </div>
+    </div>
+  </div>
+
+  <div
+    (click)="productDashboard()"
+    class="text-center w-fit mx-auto p-4 bg-sky-200"
+  >
+    <h1 class="text-blue-700">Products</h1>
+    <h1 class="text-1xl">Manage products</h1>
+    <h1 class="text-1xl">Total Products{{total_product}}</h1>
+  </div>
+  <div id="progressbar-div" class="">
+    <div id="progress" class="bg-gray-200 w-96">
+      <div
+        id="progress-bar-success"
+        class="bg-green-700"
+        role="progressbar"
+        [ngStyle]="{ 'width.%': publish_product}"
+      >
+        Publish products: {{ publish_product}}
+      </div>
+    </div>
+  </div>
+  <div id="progressbar-div2" class="">
+    <div id="progress" class="bg-gray-200 w-96">
+      <div
+        id="progress-bar-success"
+        class="bg-blue-700"
+        role="progressbar"
+        [ngStyle]="{ 'width.%': inactive_product}"
+      >
+        Inactive Products: {{ inactive_product}}
+      </div>
+    </div>
+  </div>
+  <div id="progressbar-div3" class="">
+    <div id="progress" class="bg-gray-200 w-96">
+      <div
+        id="progress-bar-success"
+        class="bg-yellow-400"
+        role="progressbar"
+        [ngStyle]="{ 'width.%': draft_product}"
+      >
+        Draft Products: {{ draft_product}}
+      </div>
+    </div>
+  </div>
+</div>

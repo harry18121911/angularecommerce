@@ -1,1 +1,27 @@
-<p>admin-login works!</p>
+<div>
+  <div>
+    <div>
+      <h3>Admin Login Panel</h3>
+      <form name="form" #tf="ngForm" (ngSubmit)="tf.form.valid && onSubmitSignIn()" novalidate>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" class="form-control" [(ngModel)]="signInFormValue.email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" class="form-control" [(ngModel)]="signInFormValue.password" required togglePassword>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="name" name="name" class="form-control" [(ngModel)]="signInFormValue.name" required>
+        </div>
+
+        <div class="form-group">
+          <button type="submit">Log</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

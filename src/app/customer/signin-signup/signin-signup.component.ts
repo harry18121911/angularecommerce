@@ -70,7 +70,6 @@ export class SigninSignupComponent {
       gender: this.user_reg_data.gender,
       address: this.user_reg_data.address,
       language: this.user_reg_data.language,
-      mobNumber: this.user_reg_data.language,
       number: this.user_reg_data.number,
       name: this.user_reg_data.name,
       uploadPhoto: this.user_reg_data.uploadPhoto,
@@ -103,7 +102,7 @@ export class SigninSignupComponent {
           }else if(this.user_data.role=="buyer"){
             sessionStorage.setItem("user_session_id", this.user_data.id);
             sessionStorage.setItem("role", this.user_data.role);
-            this.router.navigateByUrl("/buyer_dashboard");
+            this.router.navigateByUrl("/buyer-dashboard");
           }else{
             alert("Invalid login details");
           }
