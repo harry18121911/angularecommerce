@@ -3,7 +3,7 @@ import { HttpParams } from "@angular/common/http";
 export class User {
   id:any;
   name: string = "";
-  number: string = "";
+  number: number= 0;
   uploadPhoto: string = "";
   role: string = "";
   password:string="";

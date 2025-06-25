@@ -31,9 +31,7 @@ export class AdminService {
   }
 
   singleUser(user_id: HttpParams ){
-    console.log("This is the url that is being called  " + this.user_url + user_id)
     let concat=this.user_url+user_id;
-    console.log("This is concat " + concat)
     return this.apiService.get(concat)
   }
 
@@ -41,7 +39,7 @@ export class AdminService {
     return this.apiService.put(this.user_url + user_id, user_dto)
   }
 
-  deleteUser(user_id:HttpParams){
+  deleteUser(user_id:string){
     return this.apiService.delete(this.user_url + user_id)
   }
 

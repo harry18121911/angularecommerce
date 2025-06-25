@@ -22,6 +22,7 @@
     >
       <tr>
         <th scope="col" class="px-6 py-3">#</th>
+        <th scope="col" class="px-6 py-3">ID</th>
         <th scope="col" class="px-6 py-3">Name</th>
         <th scope="col" class="px-6 py-3">Mob</th>
         <th scope="col" class="px-6 py-3">Email</th>
@@ -37,6 +38,7 @@
         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
       >
         <th scope="row">{{ i + 1 }}</th>
+        <td>{{ user_data.id}}</td>
         <td>{{ user_data.name }}</td>
         <td>{{ user_data.number }}</td>
         <td>{{ user_data.email }}</td>
@@ -54,9 +56,10 @@
   </table>
 </div>
 
-<div class="bg-gray-400" *ngIf="isVisible$ |async">
+<div class="bg-gray-400" *ngIf="isVisible$">
   <form
     [formGroup]="addEditUserForm"
+    (ngSubmit)="addUser()"
     class=""
     action="#"
     method="POST"
@@ -71,6 +74,7 @@
           type="text"
           name="name"
           id="name"
+          formControlName="name"
           autocomplete="Name"
           required
           class="block w-86 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -87,6 +91,7 @@
           type="email"
           name="email"
           id="email"
+          formControlName="email"
           autocomplete="Email"
           required
           class="block w-86 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -103,6 +108,7 @@
           type="number"
           name="number"
           id="number"
+          formControlName="number"
           autocomplete="Number"
           required
           class="block w-86 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -119,6 +125,7 @@
           type="text"
           name="age"
           id="age"
+          formControlName="age"
           autocomplete="Age"
           required
           class="block w-86 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -134,6 +141,7 @@
           type="text"
           name="address"
           id="address"
+          formControlName="address"
           autocomplete="Address"
           required
           class="block w-86 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -141,7 +149,7 @@
       </div>
     </div>
       <div class="block w-86 h-9 mt-8 rounded-md bg-red-600 text-center text-gray-900   placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 ">
-        <button class="mt-1" (click)="addUser()" *ngIf="add_user">Register</button>
+        <button class="mt-1" type="submit" *ngIf="add_user">Register</button>
         <button class="mt-1" (click)="updateUser(user_dto.id)" *ngIf="edit_user">Update
         </button>
       </div>

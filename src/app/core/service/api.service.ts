@@ -26,7 +26,7 @@ export class ApiService {
   }
 
   post(path:string,body:Object={}):Observable<Object>{
-    return this.http.put(path,JSON.stringify(body),this.httpOptions).pipe(catchError(this.formatErrors))
+    return this.http.post(path,JSON.stringify(body),this.httpOptions).pipe(catchError(this.formatErrors))
   }
 
   delete(path:string):Observable<Object>{

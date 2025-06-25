@@ -6,12 +6,11 @@ import { AdminService } from '../services/admin.service';
 import { User } from '../../core/Model/object-model';
 import { HttpParams } from '@angular/common/http';
 import { toggleVisibilityService } from '../../service/toggle-visibility.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-crud',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './user-crud.component.html',
   styleUrl: './user-crud.component.css'
 })
@@ -19,9 +18,20 @@ export class UserCrudComponent implements OnInit {
   all_user_data: User[] = [];
   single_user_data: User = new User;
   addEditUserForm: FormGroup = new FormGroup({
+    id: new FormControl(""),
     name: new FormControl(""),
     password: new FormControl(""),
     email: new FormControl(""),
+    uploadPhoto: new FormControl(""),
+    role: new FormControl(""),
+    number: new FormControl(0),
+    address: new FormControl(""),
+    gender: new FormControl(""),
+    language: new FormControl(""),
+    dateOfBirth: new FormControl(""),
+    agreetc: new FormControl(false),
+    age: new FormControl(0),
+    aboutYou: new FormControl(""),
   });
   user_dto: User = new User;
   user_reg_data: User = new User;
@@ -33,28 +43,10 @@ export class UserCrudComponent implements OnInit {
   signInFormValue: User = new User;
   ;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private adminService: AdminService, private toggleVisibilityService:toggleVisibilityService) {
-    this.isVisible$ = this.toggleVisibilityService.isVisible$; // ✅ Now it's safe
+  constructor(private formBuilder: FormBuilder, private router: Router, private adminService: AdminService, private toggleVisibilityService: toggleVisibilityService) {
   }
 
   ngOnInit(): void {
-    this.addEditUserForm = this.formBuilder.group({
-      id: ["", Validators.required],
-      name: ["", Validators.required],
-      uploadPhoto: ["", Validators.required],
-      role: ["", Validators.required],
-      password: ["", Validators.required],
-      number: ["", Validators.required],
-      address: ["", Validators.required],
-      gender: ["", Validators.required],
-      language: ["", Validators.required],
-      email: ["", Validators.required],
-      dateOfBirth: ["", Validators.required],
-      agreetc: ["", Validators.required],
-      age: ["", Validators.required],
-      aboutYou: ["", Validators.required],
-    })
-
     this.getAllUser()
   }
 
@@ -75,17 +67,43 @@ export class UserCrudComponent implements OnInit {
     this.edit_user = false;
     this.add_user = true;
     this.popup_header = "Add New User";
-    this.addEditUserForm.reset();
+    this.addEditUserForm.reset(
+      {
+        id: "",
+        name: "",
+        uploadPhoto: "",
+        role: "",
+        password: "",
+        number: "",
+        address: "",
+        gender: "",
+        language: "",
+        email: "",
+        dateOfBirth: "",
+        agreetc: false,
+        age: 0,
+        aboutYou: ""
+      }
+    );
   }
 
   addUser() {
     this.addEditUser = true;
+
     if (this.addEditUserForm.invalid) {
-      alert("Error!!! " + JSON.stringify(this.addEditUserForm.value))
+      console.warn('Form is invalid. Listing control errors:');
+      Object.keys(this.addEditUserForm.controls).forEach(key => {
+        const controlErrors = this.addEditUserForm.get(key)?.errors;
+        if (controlErrors) {
+          console.warn(`Control: ${key}, Errors:`, controlErrors);
+        }
+      });
+      return;
     }
+
     this.user_reg_data = this.addEditUserForm.value;
     this.user_dto = {
-      id: this.user_reg_data.id,
+      id: this.all_user_data.length +1 ,
       aboutYou: this.user_reg_data.aboutYou,
       age: this.user_reg_data.age,
       agreetc: this.user_reg_data.agreetc,
@@ -107,7 +125,7 @@ export class UserCrudComponent implements OnInit {
     }
     )
   }
-  editUserPopout(id:HttpParams) {
+  editUserPopout(id: HttpParams) {
     this.edit_user = true;
     this.add_user = false;
     this.popup_header = "Edit User";
@@ -120,10 +138,10 @@ export class UserCrudComponent implements OnInit {
       this.upload_file_name = "";
       console.log("This is user address " + JSON.stringify(this.single_user_data.address))
       this.addEditUserForm.setValue({
-        id:id,
+        id: id,
         name: this.single_user_data.name,
         age: this.single_user_data.age,
-        email:this.single_user_data.email,
+        email: this.single_user_data.email,
         dateOfBirth: this.single_user_data.dateOfBirth,
         password: this.single_user_data.password,
         gender: this.single_user_data.gender,
@@ -138,12 +156,22 @@ export class UserCrudComponent implements OnInit {
     })
   }
 
-  updateUser(id:string) {
-    let user_id = new HttpParams;
-    user_id.set('id',id);
+
+  updateUser(id: HttpParams) {
+
     if (this.addEditUserForm.invalid) {
-      alert("Error!!! " + JSON.stringify(this.addEditUserForm.value))
+      console.warn('Form is invalid. Listing control errors:');
+      Object.keys(this.addEditUserForm.controls).forEach(key => {
+        const controlErrors = this.addEditUserForm.get(key)?.errors;
+        if (controlErrors) {
+          console.warn(`Control: ${key}, Errors:`, controlErrors);
+        }
+      });
+      return;
     }
+
+
+
     this.user_reg_data = this.addEditUserForm.value;
     this.user_dto = {
       id: this.user_reg_data.id,
@@ -157,11 +185,12 @@ export class UserCrudComponent implements OnInit {
       language: this.user_reg_data.language,
       number: this.user_reg_data.number,
       name: this.user_reg_data.name,
-      uploadPhoto: (this.user_reg_data.uploadPhoto == "" ? this.upload_file_name:this.user_reg_data.uploadPhoto),
+      uploadPhoto: (this.user_reg_data.uploadPhoto == "" ? this.upload_file_name : this.user_reg_data.uploadPhoto),
       role: this.user_reg_data.role,
       password: this.user_reg_data.password
     }
-    this.adminService.editUser(user_id, this.user_dto).subscribe(data => {
+    this.adminService.editUser(id, this.user_dto).subscribe(data => {
+      console.log("This should show the values of this.user_dto " + this.user_dto)
       this.getAllUser();
       // Change for Tailwind equivalent
       // JQuery("#addEditUserModal").modal("toggle")
@@ -169,19 +198,20 @@ export class UserCrudComponent implements OnInit {
     )
   }
 
-  deleteUser(id:string){
-    let user_id = new HttpParams;
-    user_id.set('id',id)
-    this.adminService.deleteUser(user_id).subscribe(data=>{
+  deleteUser(id: string) {
+    console.log("User crud component id: " + id)
+    this.adminService.deleteUser(id).subscribe(data => {
       this.getAllUser();
     })
 
   }
 
-  // Visibility funtions
-  isVisible$: Observable<boolean>;
-  toggleVisibility():void {
-    this.toggleVisibilityService.toggleVisibility(); // Toggle the boolean value
+
+  isVisible$ = false;
+  toggleVisibility() {
+    console.log(this.isVisible$)
+    this.isVisible$ = this.toggleVisibilityService.toggleVisibility(this.isVisible$);
+    console.log(this.isVisible$)
   }
 }
 
