@@ -1,1 +1,104 @@
-<p>user-profile works!</p>
+<div>
+  <button (click)="toggleVisibility()">Edit User Data</button>
+</div>
+
+<div class="bg-gray-400" *ngIf="isVisible$">
+  <form
+    [formGroup]="userProfileForm"
+    (ngSubmit)="updateProfile()"
+    class=""
+    action="#"
+    method="POST"
+  >
+    <div class="space-y-6 space-x-3 flex flex-wrap">
+      <div>
+        <label for="name" class="block text-sm/6 font-medium text-gray-900"
+          >Name</label
+        >
+        <div class="mt-2">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            formControlName="name"
+            autocomplete="Name"
+            required
+            class="block w-86 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm/6 font-medium text-gray-900"
+          >Email address</label
+        >
+        <div class="mt-2">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            formControlName="email"
+            autocomplete="Email"
+            required
+            class="block w-86 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="number" class="block text-sm/6 font-medium text-gray-900"
+          >Number</label
+        >
+        <div class="mt-2">
+          <input
+            type="number"
+            name="number"
+            id="number"
+            formControlName="number"
+            autocomplete="Number"
+            required
+            class="block w-86 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="age" class="block text-sm/6 font-medium text-gray-900"
+          >Age</label
+        >
+        <div class="mt-2">
+          <input
+            type="text"
+            name="age"
+            id="age"
+            formControlName="age"
+            autocomplete="Age"
+            required
+            class="block w-86 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+          />
+        </div>
+      </div>
+      <div>
+        <label for="address" class="block text-sm/6 font-medium text-gray-900"
+          >Address</label
+        >
+        <div class="mt-2">
+          <input
+            type="text"
+            name="address"
+            id="address"
+            formControlName="address"
+            autocomplete="Address"
+            required
+            class="block w-86 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+          />
+        </div>
+      </div>
+      <div
+        class="block w-86 h-9 mt-8 rounded-md bg-red-600 text-center text-gray-900 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+      >
+        <button class="mt-1" type="submit" *ngIf="edit_user">Update</button>
+      </div>
+    </div>
+  </form>
+</div>

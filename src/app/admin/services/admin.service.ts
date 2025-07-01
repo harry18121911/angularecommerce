@@ -30,12 +30,12 @@ export class AdminService {
     return this.apiService.post(this.user_url,user_dto)
   }
 
-  singleUser(user_id: HttpParams ){
+  singleUser(user_id: string){
     let concat=this.user_url+user_id;
     return this.apiService.get(concat)
   }
 
-  editUser(user_id:HttpParams, user_dto:User){
+  editUser(user_id:string, user_dto:User){
     return this.apiService.put(this.user_url + user_id, user_dto)
   }
 

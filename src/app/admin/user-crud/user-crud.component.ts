@@ -4,7 +4,6 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { Router } from '@angular/router';
 import { AdminService } from '../services/admin.service';
 import { User } from '../../core/Model/object-model';
-import { HttpParams } from '@angular/common/http';
 import { toggleVisibilityService } from '../../service/toggle-visibility.service';
 
 @Component({
@@ -41,7 +40,6 @@ export class UserCrudComponent implements OnInit {
   edit_user: boolean = false;
   popup_header: string = "";
   signInFormValue: User = new User;
-  ;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private adminService: AdminService, private toggleVisibilityService: toggleVisibilityService) {
   }
@@ -74,7 +72,7 @@ export class UserCrudComponent implements OnInit {
         uploadPhoto: "",
         role: "",
         password: "",
-        number: "",
+        number: 0,
         address: "",
         gender: "",
         language: "",
@@ -103,7 +101,7 @@ export class UserCrudComponent implements OnInit {
 
     this.user_reg_data = this.addEditUserForm.value;
     this.user_dto = {
-      id: this.all_user_data.length +1 ,
+      id: (this.all_user_data.length +1).toString(),
       aboutYou: this.user_reg_data.aboutYou,
       age: this.user_reg_data.age,
       agreetc: this.user_reg_data.agreetc,
@@ -118,6 +116,8 @@ export class UserCrudComponent implements OnInit {
       role: this.user_reg_data.role,
       password: this.user_reg_data.password
     }
+
+    console.log("THIS IS USERDTO " + this.user_dto)
     this.adminService.addUser(this.user_dto).subscribe(data => {
       this.getAllUser();
       // Change for Tailwind equivalent
@@ -125,7 +125,7 @@ export class UserCrudComponent implements OnInit {
     }
     )
   }
-  editUserPopout(id: HttpParams) {
+  editUserPopout(id: string) {
     this.edit_user = true;
     this.add_user = false;
     this.popup_header = "Edit User";
@@ -157,8 +157,7 @@ export class UserCrudComponent implements OnInit {
   }
 
 
-  updateUser(id: HttpParams) {
-
+  updateUser(id: string) {
     if (this.addEditUserForm.invalid) {
       console.warn('Form is invalid. Listing control errors:');
       Object.keys(this.addEditUserForm.controls).forEach(key => {
@@ -170,11 +169,9 @@ export class UserCrudComponent implements OnInit {
       return;
     }
 
-
-
     this.user_reg_data = this.addEditUserForm.value;
     this.user_dto = {
-      id: this.user_reg_data.id,
+      id: this.user_reg_data.id.toString(),
       aboutYou: this.user_reg_data.aboutYou,
       age: this.user_reg_data.age,
       agreetc: this.user_reg_data.agreetc,
@@ -189,8 +186,9 @@ export class UserCrudComponent implements OnInit {
       role: this.user_reg_data.role,
       password: this.user_reg_data.password
     }
+
     this.adminService.editUser(id, this.user_dto).subscribe(data => {
-      console.log("This should show the values of this.user_dto " + this.user_dto)
+      console.log("This should show the values of this.user_dto " + JSON.stringify(this.user_dto))
       this.getAllUser();
       // Change for Tailwind equivalent
       // JQuery("#addEditUserModal").modal("toggle")

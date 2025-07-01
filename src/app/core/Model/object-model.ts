@@ -1,7 +1,7 @@
 import { HttpParams } from "@angular/common/http";
 
 export class User {
-  id:any;
+  id:string="";
   name: string = "";
   number: number= 0;
   uploadPhoto: string = "";
@@ -27,7 +27,7 @@ export class Address {
 }
 
 export class Product {
-  id: number = 0;
+  id: string= "";
   name: string = "";
   uploadPhoto: string = "";
   uploadDescription: string = "";
@@ -37,11 +37,11 @@ export class Product {
 }
 
 export class Order {
-  id: number = 0;
-  userId: number = 0;
-  sellerId: number = 0;
+  id: string= "";
+  userId: string= "";
+  sellerId: string= "";
   product: Product = {
-    id: 0,
+    id: "",
     name: "",
     uploadPhoto: "",
     uploadDescription: "",

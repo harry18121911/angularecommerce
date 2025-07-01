@@ -27,7 +27,7 @@ export class AdminLoginComponent implements OnInit {
       let datas=data as User[];
       this.user_data=datas[0] as User;
       if(this.user_data){
-        sessionStorage.setItem("user_session_id",this.user_data.id)
+        sessionStorage.setItem("user_session_id",this.user_data.id.toString())
         sessionStorage.setItem("role",this.user_data.role)
         this.router.navigateByUrl("/admin-dashboard")
       }else{

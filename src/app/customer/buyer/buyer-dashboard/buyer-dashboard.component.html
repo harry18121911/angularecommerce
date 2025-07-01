@@ -1,1 +1,15 @@
-<p>buyer-dashboard works!</p>
+<br />
+<div *ngFor="let product of all_products">
+  <div class="card"><img src="{{product.uploadPhoto}}" alt="{{product.name}}" />
+
+    <h4>{{product.name}}</h4>
+    <p>{{product.uploadDescription}}</p>
+    <p>{{product.mrp}}</p>
+    <strong>{{product.dp}}</strong>
+    <p>{{product.status}}</p>
+
+    <a (click)=addToCart()>Add to Cart</a>
+    <a (click)=buyProduct(product.id)>Buy Now</a>
+  </div>
+
+</div>
